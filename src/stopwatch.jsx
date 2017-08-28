@@ -15,7 +15,7 @@ class Stopwatch extends React.Component {
       }
       this.tickTock = setInterval(
         () => this.setState({currentTime: Date.now()})
-      , 1000);
+      , 10);
     }
 
     reset() {
@@ -24,7 +24,19 @@ class Stopwatch extends React.Component {
     }
 
     parseTime(time) {
-      return Math.floor(time / 1000);
+      let mills = Math.floor(time % 1000 / 10);
+      let seconds = Math.floor(time / 1000 % 60);
+      let minutes = Math.floor(time / 60000);
+      let hours = Math.floor(time / 360000);
+
+      if(hours) {
+        return `${hours}h ${minutes}m ${seconds}s ${mills}`
+      } else if (minutes) {
+        return `${minutes}m ${seconds}s ${mills}`
+      } else {
+        return `${seconds}s ${mills}`
+      }
+
     }
 
     render() {
