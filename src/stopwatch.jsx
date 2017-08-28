@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './stopwatch.css'
 class Stopwatch extends React.Component {
     constructor(props) {
       super(props);
@@ -21,7 +21,7 @@ class Stopwatch extends React.Component {
 
     reset() {
       clearInterval(this.tickTock);
-      this.setState({startTime: 0, currentTime: 0, on: false});
+      this.setState({startTime: 0, currentTime: 0, on: false, pauseTime: 0});
     }
 
     pause() {
@@ -42,7 +42,6 @@ class Stopwatch extends React.Component {
       } else {
         return `${seconds}s ${mills}`
       }
-
     }
 
     render() {
@@ -50,10 +49,12 @@ class Stopwatch extends React.Component {
       const buttonText = this.state.on ? "Pause" : "Start"
       const buttonFunc = this.state.on ? this.pause : this.start
       return (
-        <div>
+        <div className="stopwatch">
           <h1>{time}</h1>
-          <button onClick={buttonFunc}>{buttonText}</button>
-          <button onClick={this.reset}>Reset</button>
+          <div className="stopwatch-buttons">
+            <button className="stopwatch-button green" onClick={buttonFunc}>{buttonText}</button>
+            <button className="stopwatch-button" onClick={this.reset}>Reset</button>
+          </div>
         </div>
       )
     }
