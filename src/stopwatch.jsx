@@ -17,8 +17,8 @@ class Stopwatch extends React.Component {
 
     reset() {
       clearInterval(this.tickTock);
+      this.setState({startTime: 0, currentTime: 0});
     }
-
 
     render() {
       return (
