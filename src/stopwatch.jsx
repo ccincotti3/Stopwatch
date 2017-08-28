@@ -5,13 +5,18 @@ class Stopwatch extends React.Component {
       super(props);
       this.state = {startTime: Date.now(), currentTime: Date.now()}
       this.start = this.start.bind(this);
+      this.reset = this.reset.bind(this);
     }
 
     start(){
       this.setState({startTime: Date.now(), currentTime: Date.now()})
-      setInterval(
+      this.tickTock = setInterval(
         () => this.setState({currentTime: Date.now()})
       , 1000);
+    }
+
+    reset() {
+      clearInterval(this.tickTock);
     }
 
 
@@ -20,7 +25,7 @@ class Stopwatch extends React.Component {
         <div>
           <h1>{this.state.currentTime - this.state.startTime}</h1>
           <button onClick={this.start}>Start</button>
-          <button>Reset</button>
+          <button onClick={this.reset}>Reset</button>
         </div>
       )
     }
